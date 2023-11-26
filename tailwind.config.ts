@@ -5,7 +5,15 @@ const config: Config = {
   darkMode: 'class',
   theme: {
     extend: {
-      colors: {}
+      colors: {
+        dark: '#0C0E16',
+        purple: '#7C5DFA',
+        'ligh-purple': '#9277FF',
+        'grayish-blue': '#373B53',
+        'dark-grayish-blue': '#1E2139',
+        'very-dark-blue': '#141625',
+        'grayish-white': '#F8F8FB'
+      }
     }
   },
   plugins: []
