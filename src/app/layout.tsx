@@ -1,6 +1,8 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { type FC, ReactNode } from 'react'
+import { League_Spartan as Spartan } from 'next/font/google'
+import clsx from 'clsx'
 import { AppWrapper, AppBar } from '@/components'
 
 const title = 'Invoice App'
@@ -50,11 +52,18 @@ export const metadata: Metadata = {
   }
 }
 
+const spartan = Spartan({ subsets: ['latin'] })
+
 const RootLayout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <AppWrapper>
       <html lang='en'>
-        <body className='w-full h-full absolute flex flex-col top-0 left-0 overflow-y-auto duration-200 bg-grayish-white text-dark dark:text-white dark:bg-very-dark-blue lg:overflow-hidden lg:flex-row'>
+        <body
+          className={clsx(
+            'w-full h-full absolute flex flex-col font-medium top-0 left-0 overflow-y-auto duration-200 bg-grayish-white text-dark dark:text-white dark:bg-very-dark-blue lg:overflow-hidden lg:flex-row',
+            spartan.className
+          )}
+        >
           <AppBar />
           <main className='flex-1 px-6 pt-8 pb-20 md:px-12 md:pt-14 lg:overflow-y-auto'>
             <div className='w-full mx-auto min-h-full max-w-[730px]'>{children}</div>
