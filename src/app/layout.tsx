@@ -1,6 +1,7 @@
 import './globals.css'
-import type { FC, ReactNode } from 'react'
 import type { Metadata } from 'next'
+import { type FC, ReactNode } from 'react'
+import { AppWrapper, AppBar } from '@/components'
 
 const title = 'Invoice App'
 const description = 'A simple invoice app created with Next.js and TypeScript.'
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('http://localhost:3000/'),
   openGraph: {
     type: 'website',
-    locale: 'es_ES',
+    locale: 'en_US',
     title,
     description,
     images: [
@@ -51,9 +52,16 @@ export const metadata: Metadata = {
 
 const RootLayout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
-    <html lang='es'>
-      <body>{children}</body>
-    </html>
+    <AppWrapper>
+      <html lang='en'>
+        <body className='w-full h-full absolute flex flex-col top-0 left-0 overflow-y-auto bg-grayish-white text-dark dark:text-white dark:bg-very-dark-blue lg:overflow-hidden lg:flex-row'>
+          <AppBar />
+          <main className='flex-1 px-6 pt-8 pb-20 md:px-12 md:pt-14 lg:overflow-y-auto'>
+            <div className='w-full mx-auto min-h-full max-w-[730px]'>{children}</div>
+          </main>
+        </body>
+      </html>
+    </AppWrapper>
   )
 }
 
