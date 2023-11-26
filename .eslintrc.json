@@ -1,0 +1,12 @@
+{
+  "extends": ["next/core-web-vitals", "./node_modules/standard/eslintrc.json"],
+  "globals": {
+    "JSX": true,
+    "React": true
+  },
+  "rules": {
+    "space-before-function-paren": "off",
+    "multiline-ternary": "off",
+    "react/display-name": "off"
+  }
+}
