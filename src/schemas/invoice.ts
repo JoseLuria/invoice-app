@@ -11,6 +11,13 @@ const addressSchema = z.object({
   country: nonEmptyString
 })
 
+const itemSchema = z.object({
+  name: nonEmptyString,
+  quantity: positiveNumber,
+  price: positiveNumber,
+  total: positiveNumber
+})
+
 export const invoiceSchema = z.object({
   id: nonEmptyString,
   createdAt: nonEmptyString,
@@ -22,14 +29,7 @@ export const invoiceSchema = z.object({
   status: z.enum(['paid', 'pending', 'draft']),
   senderAddress: addressSchema,
   clientAddress: addressSchema,
-  items: z.array(
-    z.object({
-      name: nonEmptyString,
-      quantity: positiveNumber,
-      price: positiveNumber,
-      total: positiveNumber
-    })
-  ),
+  items: z.array(itemSchema),
   total: positiveNumber
 })
 
