@@ -15,7 +15,7 @@ export const AppBar = () => {
   }
 
   return (
-    <header className='w-full flex bg-grayish-blue dark:bg-dark-grayish-blue items-center lg:flex-col lg:rounded-r-[20px] lg:w-auto lg:h-full'>
+    <header className='w-full flex duration-200 bg-grayish-blue dark:bg-dark-grayish-blue items-center lg:flex-col lg:rounded-r-[20px] lg:w-auto lg:h-full'>
       <Link
         className='relative w-[72px] h-[72px] bg-purple flex overflow-hidden rounded-r-[20px] md:w-20 md:h-20 lg:w-[103px] lg:h-[103px]'
         href='/'
