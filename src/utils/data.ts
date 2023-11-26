@@ -10,7 +10,7 @@ export const generateId = () => {
 }
 
 export const formatDate = (date: Date) => {
-  return date.toLocaleDateString('es-MX', {
+  return date.toLocaleDateString('en-US', {
     day: 'numeric',
     month: 'long',
     year: 'numeric'
