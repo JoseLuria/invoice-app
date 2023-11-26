@@ -5,7 +5,7 @@ import { Logo, Sun, Moon } from '../svg'
 
 export const AppBar = () => {
   const toggleTheme = () => {
-    if (localStorage.theme === 'dark') {
+    if (document.documentElement.classList.contains('dark')) {
       localStorage.theme = 'light'
       document.documentElement.classList.remove('dark')
     } else {
@@ -36,6 +36,7 @@ export const AppBar = () => {
         src='/assets/image-avatar.webp'
         width={80}
         height={80}
+        priority
         alt='Avatar'
       />
     </header>
