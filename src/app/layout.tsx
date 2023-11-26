@@ -65,7 +65,7 @@ const RootLayout: FC<{ children: ReactNode }> = ({ children }) => {
           )}
         >
           <AppBar />
-          <main className='flex-1 px-6 pt-8 pb-20 md:px-12 md:pt-14 lg:overflow-y-auto'>
+          <main className='flex-1 px-6 pt-8 pb-20 md:px-12 md:pt-14 lg:py-[72px] lg:overflow-y-auto'>
             <div className='w-full mx-auto min-h-full max-w-[730px]'>{children}</div>
           </main>
         </body>
