@@ -10,7 +10,7 @@ const config: Config = {
         purple: '#7C5DFA',
         gray: '#888EB0',
         'light-gray': '#DFE3FA',
-        'ligh-purple': '#9277FF',
+        'light-purple': '#9277FF',
         'grayish-blue': '#373B53',
         'dark-grayish-blue': '#1E2139',
         'very-dark-blue': '#141625',
