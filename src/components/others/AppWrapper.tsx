@@ -1,11 +1,13 @@
 'use client'
-import { type ReactNode, type FC, useEffect } from 'react'
+import { type ReactNode, type FC, useEffect, useState } from 'react'
 
 interface Props {
   children: ReactNode
 }
 
 export const AppWrapper: FC<Props> = ({ children }) => {
+  const [mounted, setMounted] = useState(false)
+
   useEffect(() => {
     if (
       localStorage.theme === 'dark' ||
@@ -15,7 +17,10 @@ export const AppWrapper: FC<Props> = ({ children }) => {
     } else {
       document.documentElement.classList.remove('dark')
     }
+    setMounted(true)
   }, [])
+
+  if (!mounted) return <body />
 
   return <>{children}</>
 }
