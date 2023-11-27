@@ -1,4 +1,4 @@
-import type { Invoice } from '@/schemas'
+import type { Invoice, InvoiceStatus } from '@/schemas'
 
 export const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
@@ -16,6 +16,8 @@ export const THEME = {
   LIGHT: 'light',
   DARK: 'dark'
 }
+
+export const STATUS_VALUES: InvoiceStatus[] = ['paid', 'pending', 'draft']
 
 export const INITIAL_INVOICES: Invoice[] = [
   {
