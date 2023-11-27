@@ -16,6 +16,15 @@ const config: Config = {
         'very-dark-blue': '#141625',
         'grayish-white': '#F8F8FB'
       }
+    },
+    keyframes: {
+      fadeIn: {
+        '0%': { opacity: '0' },
+        '100%': { opacity: '1' }
+      }
+    },
+    animation: {
+      'fade-in': 'fadeIn 0.3s ease-in-out'
     }
   },
   plugins: []
