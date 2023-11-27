@@ -23,7 +23,7 @@ export const invoiceSchema = z.object({
   createdAt: nonEmptyString,
   paymentDue: nonEmptyString,
   description: nonEmptyString,
-  paymentTerms: nonEmptyString,
+  paymentTerms: positiveNumber,
   clientName: nonEmptyString,
   clientEmail: z.string().email(ERRORS.EMAIL),
   status: z.enum(['paid', 'pending', 'draft']),
