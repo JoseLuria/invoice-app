@@ -1,3 +1,5 @@
+import type { Invoice } from '@/schemas'
+
 export const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 export const NUMBERS = '0123456789'
@@ -10,7 +12,12 @@ export const ERRORS = {
 
 export const MOBILE_REGEX = /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i
 
-export const INITIAL_INVOICES = [
+export const THEME = {
+  LIGHT: 'light',
+  DARK: 'dark'
+}
+
+export const INITIAL_INVOICES: Invoice[] = [
   {
     id: 'RT3080',
     createdAt: '2021-08-18',

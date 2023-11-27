@@ -2,31 +2,39 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Logo, Sun, Moon } from '../svg'
+import { THEME } from '@/contants'
 
 export const AppBar = () => {
   const toggleTheme = () => {
-    if (document.documentElement.classList.contains('dark')) {
-      localStorage.theme = 'light'
-      document.documentElement.classList.remove('dark')
+    const darkElements = document.querySelectorAll('[class*="dark:"]')
+
+    darkElements.forEach((element) => element.classList.add('duration-200'))
+
+    if (document.documentElement.classList.contains(THEME.DARK)) {
+      localStorage.theme = THEME.LIGHT
+      document.documentElement.classList.remove(THEME.DARK)
     } else {
-      localStorage.theme = 'dark'
-      document.documentElement.classList.add('dark')
+      localStorage.theme = THEME.DARK
+      document.documentElement.classList.add(THEME.DARK)
     }
   }
 
   return (
-    <header className='w-full flex duration-200 bg-grayish-blue dark:bg-dark-grayish-blue items-center lg:flex-col lg:rounded-r-[20px] lg:w-auto lg:h-full'>
+    <header className='w-full flex bg-grayish-blue dark:bg-dark-grayish-blue items-center lg:flex-col lg:rounded-r-[20px] lg:w-auto lg:h-full'>
       <Link
         className='relative w-[72px] h-[72px] bg-purple flex overflow-hidden rounded-r-[20px] md:w-20 md:h-20 lg:w-[103px] lg:h-[103px]'
         href='/'
       >
         <Logo className='absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 lg:scale-150' />
-        <span className='h-[50%] w-full bg-ligh-purple mt-auto rounded-tl-[20px]' />
+        <span className='h-[50%] w-full bg-light-purple mt-auto rounded-tl-[20px]' />
       </Link>
 
-      <button onClick={toggleTheme} className='ml-auto mr-6 md:mr-8 lg:mt-auto lg:mx-0 lg:mb-8'>
-        <Sun className='dark:block hidden' />
-        <Moon className='dark:hidden' />
+      <button
+        onClick={toggleTheme}
+        className='group ml-auto mr-6 md:mr-8 lg:mt-auto lg:mx-0 lg:mb-8'
+      >
+        <Sun className='dark:block hidden duration-200 group-hover:fill-light-gray group-focus-visible:fill-light-gray' />
+        <Moon className='dark:hidden duration-200 group-hover:fill-light-gray group-focus-visible:fill-light-gray' />
       </button>
 
       <span className='w-px h-full bg-[#494E6E] lg:w-full lg:h-px' />
