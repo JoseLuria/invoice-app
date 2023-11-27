@@ -56,21 +56,21 @@ const spartan = Spartan({ subsets: ['latin'] })
 
 const RootLayout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
-    <AppWrapper>
-      <html lang='en'>
+    <html lang='en'>
+      <AppWrapper>
         <body
           className={clsx(
-            'w-full h-full absolute flex flex-col font-medium top-0 left-0 overflow-y-auto duration-200 bg-grayish-white text-dark dark:text-white dark:bg-very-dark-blue lg:overflow-hidden lg:flex-row',
+            'w-full h-full absolute flex flex-col font-medium top-0 left-0 overflow-y-auto bg-grayish-white text-dark dark:text-white dark:bg-very-dark-blue lg:overflow-hidden lg:flex-row',
             spartan.className
           )}
         >
           <AppBar />
-          <main className='flex-1 relative px-6 pt-8 pb-20 md:px-12 md:pt-14 lg:py-[72px] lg:overflow-y-auto'>
+          <main className='flex-1 relative px-6 py-8 md:px-12 md:py-14 lg:py-[72px] lg:overflow-y-auto'>
             <div className='w-full mx-auto min-h-full flex flex-col max-w-[730px]'>{children}</div>
           </main>
         </body>
-      </html>
-    </AppWrapper>
+      </AppWrapper>
+    </html>
   )
 }
 
