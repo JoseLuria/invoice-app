@@ -3,18 +3,18 @@ import { type FC, useState, useEffect, useRef } from 'react'
 import clsx from 'clsx'
 import { ArrowDown, Plus } from '../svg'
 import { useInvoiceStore } from '@/store'
-import { MOBILE_REGEX, STATUS_VALUES } from '@/contants'
+import { STATUS_VALUES } from '@/contants'
 import { capitalize } from '@/utils'
 
 interface Props {
-  userAgent: string
+  isMobile?: boolean
 }
 
-export const Header: FC<Props> = ({ userAgent }) => {
+export const Header: FC<Props> = ({ isMobile }) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false)
-  const isMobile = MOBILE_REGEX.test(userAgent)
-  const { invoices, status, setStatus } = useInvoiceStore()
-  const quantity = invoices.length
+  const { invoices, filteredInvoices, status, setStatus } = useInvoiceStore()
+
+  const quantity = status.length > 0 ? filteredInvoices.length : invoices.length
 
   const modalRef = useRef<HTMLDivElement>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)
