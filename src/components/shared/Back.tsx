@@ -13,7 +13,7 @@ export const Back: FC<Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick' | 
   return (
     <button
       className={clsx(
-        'flex items-center gap-6 text-sm duration-200 hover:text-[#7E88C3] focus-visible:text-[#7E88C3] dark:hover:text-gray dark:focus-visible:text-gray',
+        'flex items-center gap-6 text-sm duration-200 w-fit hover:text-[#7E88C3] focus-visible:text-[#7E88C3] dark:hover:text-gray dark:focus-visible:text-gray',
         className
       )}
       onClick={() => router.back()}
