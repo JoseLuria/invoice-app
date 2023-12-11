@@ -9,6 +9,7 @@ const config: Config = {
         dark: '#0C0E16',
         purple: '#7C5DFA',
         gray: '#888EB0',
+        grayish: '#858BB2',
         'light-gray': '#DFE3FA',
         'light-purple': '#9277FF',
         'grayish-blue': '#373B53',
@@ -25,9 +26,11 @@ const config: Config = {
     },
     animation: {
       'fade-in': 'fadeIn 0.3s ease-in-out'
+    },
+    boxShadow: {
+      card: '0px 10px 10px -10px rgba(72, 84, 159, 0.10)'
     }
-  },
-  plugins: []
+  }
 }
 
 export default config
