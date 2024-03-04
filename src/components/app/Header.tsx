@@ -1,5 +1,6 @@
 'use client'
 import { type FC, useState, useEffect, useRef } from 'react'
+import Link from 'next/link'
 import clsx from 'clsx'
 import { ArrowDown, Plus } from '../svg'
 import { useInvoiceStore } from '@/store'
@@ -12,10 +13,9 @@ interface Props {
 
 export const Header: FC<Props> = ({ isMobile }) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false)
-  const { invoices, filteredInvoices, status, setStatus } = useInvoiceStore()
+  const { getInvoices, setStatus, statusToFilter } = useInvoiceStore()
 
-  const quantity = status.length > 0 ? filteredInvoices.length : invoices.length
-
+  const quantity = getInvoices().length
   const modalRef = useRef<HTMLDivElement>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)
 
@@ -48,7 +48,7 @@ export const Header: FC<Props> = ({ isMobile }) => {
     <section className='flex items-center'>
       <p className='font-semibold text-xl flex flex-col md:text-3xl'>
         Invoices
-        <span className='text-base font-medium duration-200 text-gray dark:text-light-gray'>
+        <span className='text-sm font-medium duration-200 text-gray dark:text-light-gray'>
           {getHeaderText()}
         </span>
       </p>
@@ -74,21 +74,23 @@ export const Header: FC<Props> = ({ isMobile }) => {
                   <input
                     className={clsx(
                       'w-4 h-4 relative cursor-pointer after:border-[1px] after:rounded-sm after:absolute after:top-0 after:left-0 after:w-full after:h-full',
-                      status.includes(statusKey)
+                      statusToFilter.includes(statusKey)
                         ? 'after:bg-purple after:flex after:justify-center after:items-center after:border-purple after:content-[url(/assets/icon-check.svg)]'
                         : 'after:bg-light-gray after:border-light-gray after:hover:border-purple dark:after:hover:border-purple dark:after:bg-very-dark-blue dark:after:border-very-dark-blue'
                     )}
                     onChange={({ target }) => {
                       if (target.checked) {
-                        setStatus([...status, statusKey])
+                        setStatus([...statusToFilter, statusKey])
                       } else {
-                        setStatus(status.filter((checkedStatus) => checkedStatus !== statusKey))
+                        setStatus(
+                          statusToFilter.filter((checkedStatus) => checkedStatus !== statusKey)
+                        )
                       }
                     }}
                     type='checkbox'
                     name={statusKey}
                     id={statusKey}
-                    checked={status.includes(statusKey)}
+                    checked={statusToFilter.includes(statusKey)}
                   />
                   <label className='cursor-pointer' htmlFor={statusKey}>
                     {capitalize(statusKey)}
@@ -100,13 +102,16 @@ export const Header: FC<Props> = ({ isMobile }) => {
         )}
       </div>
 
-      <button className='bg-purple py-1.5 pl-1.5 pr-3.5 rounded-full flex items-center gap-2 text-white ml-[18px] duration-200 md:ml-10 hover:bg-light-purple focus-visible:bg-light-purple'>
+      <Link
+        href='/?formId=new'
+        className='bg-purple py-1.5 pl-1.5 pr-3.5 rounded-full flex items-center gap-2 text-white ml-[18px] duration-200 md:ml-10 hover:bg-light-purple focus-visible:bg-light-purple'
+      >
         <span className='bg-white p-2.5 rounded-full'>
           <Plus />
         </span>
 
         <span className='text-sm'>{isMobile ? 'New' : 'New Invoice'}</span>
-      </button>
+      </Link>
     </section>
   )
 }

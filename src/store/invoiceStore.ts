@@ -5,32 +5,30 @@ import { INITIAL_INVOICES } from '@/contants'
 
 type InvoiceStore = {
   invoices: Invoice[]
-  filteredInvoices: Invoice[]
-  status: InvoiceStatus[]
-  hasFilters: boolean
+  statusToFilter: InvoiceStatus[]
   setStatus: (status: InvoiceStatus[]) => void
   setInvoices: (invoices: Invoice[]) => void
+  getInvoices: () => Invoice[]
 }
 
 export const invoiceStore = create<InvoiceStore>()(
   devtools(
     persist(
-      (set) => ({
+      (set, get) => ({
         invoices: [...INITIAL_INVOICES],
-        filteredInvoices: [],
-        hasFilters: false,
-        status: [],
+        statusToFilter: [],
         setStatus: (status) => {
-          set((state) => {
-            const hasFilters = status.length > 0
-            const filteredInvoices = state.invoices.filter((invoice) =>
-              status.includes(invoice.status)
-            )
-            return { ...state, status: [...status], hasFilters, filteredInvoices }
-          })
+          set((state) => ({ ...state, statusToFilter: [...status] }))
         },
         setInvoices: (invoices) => {
           set(() => ({ invoices: [...invoices] }))
+        },
+        getInvoices: () => {
+          const { invoices, statusToFilter: status } = get()
+          if (status.length > 0) {
+            return invoices.filter((invoice) => status.includes(invoice.status))
+          }
+          return invoices
         }
       }),
       { name: 'invoiceStore' }
