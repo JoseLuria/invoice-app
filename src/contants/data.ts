@@ -7,7 +7,8 @@ export const NUMBERS = '0123456789'
 export const ERRORS = {
   EMPTY: 'can’t be empty',
   EMAIL: 'invalid email',
-  POSITIVE: 'must be positive'
+  POSITIVE: 'must be positive',
+  NON_ZERO: 'can’t be 0'
 }
 
 export const MOBILE_REGEX = /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i
@@ -17,7 +18,7 @@ export const THEME = {
   DARK: 'dark'
 }
 
-export const STATUS_VALUES: InvoiceStatus[] = ['paid', 'pending', 'draft']
+export const STATUS_VALUES: InvoiceStatus[] = ['paid', 'pending']
 
 export const INITIAL_INVOICES: Invoice[] = [
   {
@@ -209,35 +210,5 @@ export const INITIAL_INVOICES: Invoice[] = [
       }
     ],
     total: 6155.91
-  },
-  {
-    id: 'FV2353',
-    createdAt: '2021-11-05',
-    paymentDue: '2021-11-12',
-    description: 'Logo Re-design',
-    paymentTerms: 7,
-    clientName: 'Anita Wainwright',
-    clientEmail: '',
-    status: 'draft',
-    senderAddress: {
-      street: '19 Union Terrace',
-      city: 'London',
-      postCode: 'E1 3EZ',
-      country: 'United Kingdom'
-    },
-    clientAddress: {
-      street: '',
-      city: '',
-      postCode: '',
-      country: ''
-    },
-    items: [
-      {
-        name: 'Logo Re-design',
-        quantity: 1,
-        price: 3102.04
-      }
-    ],
-    total: 3102.04
   }
 ]
