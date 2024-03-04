@@ -1,6 +1,6 @@
 import type { Invoice, InvoiceStatus } from '@/schemas'
 import { create } from 'zustand'
-import { persist, devtools } from 'zustand/middleware'
+import { persist } from 'zustand/middleware'
 import { INITIAL_INVOICES } from '@/contants'
 
 type InvoiceStore = {
@@ -12,27 +12,25 @@ type InvoiceStore = {
 }
 
 export const invoiceStore = create<InvoiceStore>()(
-  devtools(
-    persist(
-      (set, get) => ({
-        invoices: [...INITIAL_INVOICES],
-        statusToFilter: [],
-        setStatus: (status) => {
-          set((state) => ({ ...state, statusToFilter: [...status] }))
-        },
-        setInvoices: (invoices) => {
-          set(() => ({ invoices: [...invoices] }))
-        },
-        getInvoices: () => {
-          const { invoices, statusToFilter: status } = get()
-          if (status.length > 0) {
-            return invoices.filter((invoice) => status.includes(invoice.status))
-          }
-          return invoices
+  persist(
+    (set, get) => ({
+      invoices: [...INITIAL_INVOICES],
+      statusToFilter: [],
+      setStatus: (status) => {
+        set((state) => ({ ...state, statusToFilter: [...status] }))
+      },
+      setInvoices: (invoices) => {
+        set(() => ({ invoices: [...invoices] }))
+      },
+      getInvoices: () => {
+        const { invoices, statusToFilter: status } = get()
+        if (status.length > 0) {
+          return invoices.filter((invoice) => status.includes(invoice.status))
         }
-      }),
-      { name: 'invoiceStore' }
-    )
+        return invoices
+      }
+    }),
+    { name: 'invoiceStore' }
   )
 )
 
