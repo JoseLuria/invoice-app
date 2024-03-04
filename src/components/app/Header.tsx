@@ -58,6 +58,7 @@ export const Header: FC<Props> = ({ isMobile }) => {
           ref={buttonRef}
           onClick={() => setIsFilterOpen(!isFilterOpen)}
           className='flex items-center gap-3'
+          title='Filter by status'
         >
           {isMobile ? 'Filter' : 'Filter by status'}{' '}
           <ArrowDown className={clsx('duration-200', isFilterOpen && 'rotate-180')} />
@@ -105,6 +106,7 @@ export const Header: FC<Props> = ({ isMobile }) => {
       <Link
         href='/?formId=new'
         className='bg-purple py-1.5 pl-1.5 pr-3.5 rounded-full flex items-center gap-2 text-white ml-[18px] duration-200 md:ml-10 hover:bg-light-purple focus-visible:bg-light-purple'
+        title='Redirect to new invoice form'
       >
         <span className='bg-white p-2.5 rounded-full'>
           <Plus />
