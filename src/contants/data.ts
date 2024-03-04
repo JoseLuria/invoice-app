@@ -45,8 +45,7 @@ export const INITIAL_INVOICES: Invoice[] = [
       {
         name: 'Brand Guidelines',
         quantity: 1,
-        price: 1800.9,
-        total: 1800.9
+        price: 1800.9
       }
     ],
     total: 1800.9
@@ -76,14 +75,12 @@ export const INITIAL_INVOICES: Invoice[] = [
       {
         name: 'Banner Design',
         quantity: 1,
-        price: 156.0,
-        total: 156.0
+        price: 156.0
       },
       {
         name: 'Email Design',
         quantity: 2,
-        price: 200.0,
-        total: 400.0
+        price: 200.0
       }
     ],
     total: 556.0
@@ -113,8 +110,7 @@ export const INITIAL_INVOICES: Invoice[] = [
       {
         name: 'Website Redesign',
         quantity: 1,
-        price: 14002.33,
-        total: 14002.33
+        price: 14002.33
       }
     ],
     total: 14002.33
@@ -144,8 +140,7 @@ export const INITIAL_INVOICES: Invoice[] = [
       {
         name: 'Logo Sketches',
         quantity: 1,
-        price: 102.04,
-        total: 102.04
+        price: 102.04
       }
     ],
     total: 102.04
@@ -175,14 +170,12 @@ export const INITIAL_INVOICES: Invoice[] = [
       {
         name: 'New Logo',
         quantity: 1,
-        price: 1532.33,
-        total: 1532.33
+        price: 1532.33
       },
       {
         name: 'Brand Guidelines',
         quantity: 1,
-        price: 2500.0,
-        total: 2500.0
+        price: 2500.0
       }
     ],
     total: 4032.33
@@ -212,8 +205,7 @@ export const INITIAL_INVOICES: Invoice[] = [
       {
         name: 'Web Design',
         quantity: 1,
-        price: 6155.91,
-        total: 6155.91
+        price: 6155.91
       }
     ],
     total: 6155.91
@@ -243,8 +235,7 @@ export const INITIAL_INVOICES: Invoice[] = [
       {
         name: 'Logo Re-design',
         quantity: 1,
-        price: 3102.04,
-        total: 3102.04
+        price: 3102.04
       }
     ],
     total: 3102.04

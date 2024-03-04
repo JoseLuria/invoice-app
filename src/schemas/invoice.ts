@@ -14,8 +14,7 @@ const addressSchema = z.object({
 const itemSchema = z.object({
   name: nonEmptyString,
   quantity: positiveNumber,
-  price: positiveNumber,
-  total: positiveNumber
+  price: positiveNumber
 })
 
 const invoiceStatusSchema = z.enum(['paid', 'pending', 'draft'])
@@ -28,11 +27,11 @@ export const invoiceSchema = z.object({
   paymentTerms: positiveNumber,
   clientName: nonEmptyString,
   clientEmail: z.string().email(ERRORS.EMAIL),
-  status: invoiceStatusSchema,
+  status: invoiceStatusSchema.default('pending'),
   senderAddress: addressSchema,
   clientAddress: addressSchema,
   items: z.array(itemSchema),
-  total: positiveNumber
+  total: z.number()
 })
 
 export type InvoiceStatus = z.infer<typeof invoiceStatusSchema>
