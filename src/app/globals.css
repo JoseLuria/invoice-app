@@ -19,6 +19,12 @@ input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
 
+input[type='checkbox'] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 .dark input::-webkit-calendar-picker-indicator {
   filter: invert(1);
 }
