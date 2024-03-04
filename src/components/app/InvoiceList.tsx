@@ -33,6 +33,7 @@ export const InvoiceList = () => {
             <Link
               className='bg-white w-full rounded-lg text-sm border-[1px] grid grid-cols-2 p-6 border-white shadow-card md:hover:border-purple focus-visible:border-purple dark:border-dark-grayish-blue dark:bg-dark-grayish-blue md:dark:hover:border-purple dark:focus-visible:border-purple md:[grid-template-columns:auto_max-content_auto] md:place-items-center md:grid-flow-col md:place-content-between'
               href={`/invoice/${invoice.id}`}
+              title={`Redirect to invoice ${invoice.id}`}
             >
               <p>
                 <span className='text-[#7E88C3]'>#</span>

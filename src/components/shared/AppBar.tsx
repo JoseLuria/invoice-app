@@ -24,12 +24,14 @@ export const AppBar = () => {
       <Link
         className='relative w-[72px] h-[72px] bg-purple flex overflow-hidden rounded-r-[20px] md:w-20 md:h-20 lg:w-[103px] lg:h-[103px]'
         href='/'
+        title='Redirect to homepage'
       >
         <Logo className='absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 lg:scale-150' />
         <span className='h-[50%] w-full bg-light-purple mt-auto rounded-tl-[20px]' />
       </Link>
 
       <button
+        title='Toggle theme'
         onClick={toggleTheme}
         className='group ml-auto mr-6 md:mr-8 lg:mt-auto lg:mx-0 lg:mb-8'
       >

@@ -271,6 +271,7 @@ export const InvoiceForm: FC<Props> = ({ invoice }) => {
                               setValue('items', newItems)
                             }}
                             type='button'
+                            title='Delete this item from the list'
                           >
                             <Delete />
                           </button>
@@ -286,6 +287,7 @@ export const InvoiceForm: FC<Props> = ({ invoice }) => {
               type='button'
               full
               onClick={() => setValue('items', [...items, { name: '', quantity: 0, price: 0 }])}
+              title='Add new item to the list'
             >
               + Add New Item
             </Button>
@@ -301,11 +303,17 @@ export const InvoiceForm: FC<Props> = ({ invoice }) => {
             className={clsx('ml-auto', !invoice && 'md:ml-0 md:mr-auto')}
             variant='white'
             disabled={formState.isSubmitSuccessful}
+            title='Cancel and close form'
           >
-            {invoice ? 'Cancel' : 'Discard'}
+            Cancel
           </Button>
 
-          <Button type='submit' variant='purple' disabled={formState.isSubmitSuccessful}>
+          <Button
+            type='submit'
+            variant='purple'
+            disabled={formState.isSubmitSuccessful}
+            title='Save changes and close form'
+          >
             Save Changes
           </Button>
         </section>
