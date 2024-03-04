@@ -6,7 +6,8 @@ import clsx from 'clsx'
 import { AppWrapper, AppBar } from '@/components'
 
 const title = 'Invoice App'
-const description = 'A simple invoice app created with Next.js and TypeScript.'
+const description =
+  'A simple web application for invoice management using Next.js, TypeScript, Zustand and React Hook Form'
 
 export const metadata: Metadata = {
   title,
