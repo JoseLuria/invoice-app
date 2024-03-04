@@ -1,9 +1,14 @@
 'use client'
+import type { Invoice } from '@/schemas'
 import { useParams, useRouter } from 'next/navigation'
-import { Back, StatusLabel, Empty, Button, InvoiceForm } from '@/components'
+import dynamic from 'next/dynamic'
+import { Back, StatusLabel, Button } from '@/components'
 import { useInvoiceStore } from '@/store'
 import { useFormId } from '@/hooks'
 import { formatDate, formatCurrency } from '@/utils'
+
+const InvoiceForm = dynamic(() => import('@/components').then(({ InvoiceForm }) => InvoiceForm))
+const Empty = dynamic(() => import('@/components').then(({ Empty }) => Empty))
 
 const InvoiceById = () => {
   const { id } = useParams<{ id: string }>()
@@ -12,6 +17,19 @@ const InvoiceById = () => {
   const { formId } = useFormId()
 
   const invoice = invoices.find((invoice) => invoice.id === id)
+
+  const deleteInvoice = () => {
+    setInvoices(invoices.filter((invoice) => invoice.id !== id))
+    router.push('/')
+  }
+
+  const markAsPaid = () => {
+    const updatedInvoices = invoices.map((invoice) =>
+      invoice.id === id ? { ...invoice, status: 'paid' } : invoice
+    )
+
+    setInvoices(updatedInvoices as Invoice[])
+  }
 
   return (
     <>
@@ -30,26 +48,11 @@ const InvoiceById = () => {
                   Edit
                 </Button>
               )}
-              <Button
-                onClick={() => {
-                  setInvoices(invoices.filter(({ id }) => id !== invoice.id))
-                  router.push('/')
-                }}
-                variant='red'
-              >
+              <Button onClick={deleteInvoice} variant='red'>
                 Delete
               </Button>
               {invoice.status === 'pending' && (
-                <Button
-                  // onClick={() => {
-                  //   setInvoices(
-                  //     invoices.map((inv) =>
-                  //       inv.id === invoice.id ? { ...inv, status: 'paid' } : inv
-                  //     )
-                  //   )
-                  // }}
-                  variant='purple'
-                >
+                <Button onClick={markAsPaid} variant='purple'>
                   Mark as paid
                 </Button>
               )}
