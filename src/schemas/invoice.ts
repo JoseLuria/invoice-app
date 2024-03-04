@@ -2,7 +2,11 @@ import { z } from 'zod'
 import { ERRORS } from '@/contants'
 
 const nonEmptyString = z.string().min(1, ERRORS.EMPTY)
-const positiveNumber = z.number().positive(ERRORS.POSITIVE)
+const positiveNumber = z
+  .number({
+    invalid_type_error: ERRORS.EMPTY
+  })
+  .positive(ERRORS.POSITIVE)
 
 const addressSchema = z.object({
   street: nonEmptyString,
@@ -17,14 +21,14 @@ const itemSchema = z.object({
   price: positiveNumber
 })
 
-const invoiceStatusSchema = z.enum(['paid', 'pending', 'draft'])
+const invoiceStatusSchema = z.enum(['paid', 'pending'])
 
 export const invoiceSchema = z.object({
   id: nonEmptyString,
   createdAt: nonEmptyString,
-  paymentDue: nonEmptyString,
+  paymentDue: z.string(),
   description: nonEmptyString,
-  paymentTerms: positiveNumber,
+  paymentTerms: positiveNumber.min(1, ERRORS.NON_ZERO),
   clientName: nonEmptyString,
   clientEmail: z.string().email(ERRORS.EMAIL),
   status: invoiceStatusSchema.default('pending'),
