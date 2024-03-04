@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-button, input, a, button:focus, input:focus, a:focus, button:active, input:active, a:active {
+button,
+input,
+a,
+button:focus,
+input:focus,
+a:focus,
+button:active,
+input:active,
+a:active {
   outline: none;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.dark input::-webkit-calendar-picker-indicator {
+  filter: invert(1);
 }
