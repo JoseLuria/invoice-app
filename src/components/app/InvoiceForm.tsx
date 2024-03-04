@@ -7,7 +7,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { type Invoice, invoiceSchema } from '@/schemas'
 import { Button, Back, Input } from '../shared'
 import { Delete } from '../svg'
-import { generateId } from '@/utils'
+import { generateId, transformDate, calculatePaymentDue } from '@/utils'
+import { useInvoiceStore } from '@/store'
 
 interface Props {
   invoice?: Invoice
@@ -18,11 +19,14 @@ export const InvoiceForm: FC<Props> = ({ invoice }) => {
     resolver: zodResolver(invoiceSchema),
     defaultValues: invoice ?? {
       id: generateId(),
-      createdAt: new Date().toISOString().split('T')[0],
+      createdAt: transformDate(new Date()),
+      paymentDue: '',
+      paymentTerms: 1,
       items: [{ name: '', quantity: 0, price: 0 }],
       total: 0
     }
   })
+  const { setInvoices, invoices } = useInvoiceStore()
   const [items] = useWatch({ control, name: ['items'] })
   const router = useRouter()
 
@@ -31,7 +35,21 @@ export const InvoiceForm: FC<Props> = ({ invoice }) => {
   const hasSomeError = Object.keys(formState.errors).length > 0
 
   const onSubmit = (data: Invoice) => {
-    console.log(data)
+    data.total = items.reduce((acc, item) => acc + item.quantity * item.price, 0)
+
+    const { createdAt, paymentTerms } = data
+
+    data.paymentDue = calculatePaymentDue(createdAt, paymentTerms)
+
+    const invoiceExists = invoices.some(({ id }) => id === data.id)
+
+    if (invoiceExists) {
+      setInvoices(invoices.map((inv) => (inv.id === data.id ? data : inv)))
+    } else {
+      setInvoices([...invoices, data])
+    }
+
+    close()
   }
 
   useEffect(() => {
@@ -163,10 +181,10 @@ export const InvoiceForm: FC<Props> = ({ invoice }) => {
             />
 
             <Input
-              id='paymentDue'
-              label='Payment Terms'
-              {...register('paymentDue')}
-              error={formState.errors.paymentDue?.message}
+              id='paymentTerms'
+              label='Payment Terms (days)'
+              {...register('paymentTerms', { valueAsNumber: true })}
+              error={formState.errors.paymentTerms?.message}
               full
             />
           </div>
@@ -232,6 +250,7 @@ export const InvoiceForm: FC<Props> = ({ invoice }) => {
                         classNameError='hidden'
                         {...register(`items.${i}.price`, { valueAsNumber: true })}
                         type='number'
+                        step='0.01'
                         full
                       />
                       <div className='flex gap-4 justify-between'>
@@ -281,16 +300,13 @@ export const InvoiceForm: FC<Props> = ({ invoice }) => {
             onClick={close}
             className={clsx('ml-auto', !invoice && 'md:ml-0 md:mr-auto')}
             variant='white'
+            disabled={formState.isSubmitSuccessful}
           >
             {invoice ? 'Cancel' : 'Discard'}
           </Button>
-          {!invoice && (
-            <Button type='button' variant='dark'>
-              Save as draft
-            </Button>
-          )}
-          <Button type='submit' variant='purple'>
-            {invoice ? 'Save Changes' : 'Save & Send'}
+
+          <Button type='submit' variant='purple' disabled={formState.isSubmitSuccessful}>
+            Save Changes
           </Button>
         </section>
       </form>

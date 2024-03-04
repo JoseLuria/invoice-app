@@ -1,11 +1,14 @@
 'use client'
 import Link from 'next/link'
-import { InvoiceForm } from './InvoiceForm'
+import dynamic from 'next/dynamic'
 import { ArrowRight } from '../svg'
-import { StatusLabel, Empty } from '../shared'
+import { StatusLabel } from '../shared'
 import { useInvoiceStore } from '@/store'
 import { useFormId } from '@/hooks'
 import { formatDate, formatCurrency } from '@/utils'
+
+const InvoiceForm = dynamic(() => import('./InvoiceForm').then(({ InvoiceForm }) => InvoiceForm))
+const Empty = dynamic(() => import('../index').then(({ Empty }) => Empty))
 
 export const InvoiceList = () => {
   const { getInvoices } = useInvoiceStore()
