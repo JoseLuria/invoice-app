@@ -27,3 +27,14 @@ export const formatCurrency = (amount: number) => {
     currency: 'USD'
   }).format(amount)
 }
+
+export const transformDate = (date: string | Date) => {
+  const dateObj = typeof date === 'string' ? new Date(date) : date
+  return dateObj.toISOString().split('T')[0]
+}
+
+export const calculatePaymentDue = (date: string, terms: number) => {
+  const dueDate = new Date(date)
+  dueDate.setDate(dueDate.getDate() + terms)
+  return transformDate(dueDate)
+}
