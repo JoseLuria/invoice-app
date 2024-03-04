@@ -2,8 +2,6 @@ import { headers } from 'next/headers'
 import { InvoiceList, Header } from '@/components'
 import { MOBILE_REGEX } from '@/contants'
 
-export const runtime = 'edge'
-
 const Home = () => {
   const userAgent = headers().get('user-agent') ?? ''
   const isMobile = MOBILE_REGEX.test(userAgent)

@@ -7,8 +7,6 @@ import { useInvoiceStore } from '@/store'
 import { useFormId } from '@/hooks'
 import { formatDate, formatCurrency } from '@/utils'
 
-export const runtime = 'edge'
-
 const InvoiceForm = dynamic(() => import('@/components').then(({ InvoiceForm }) => InvoiceForm))
 const Empty = dynamic(() => import('@/components').then(({ Empty }) => Empty))
 
